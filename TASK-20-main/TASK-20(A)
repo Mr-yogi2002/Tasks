@@ -1,0 +1,35 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from time import sleep
+
+
+driver=webdriver.Chrome()
+driver.maximize_window()
+driver.get("https://www.cowin.gov.in/")
+sleep(5)
+
+PAQ = driver.find_element(By.XPATH,"//*[@id='navbar']/div[4]/div/div[1]/div/nav/div[3]/div/ul/li[4]/a")
+sleep(2)
+PAQ.click()
+sleep(5)
+
+Partners=driver.find_element(By.XPATH,"//*[@id='navbar']/div[4]/div/div[1]/div/nav/div[3]/div/ul/li[5]/a")
+sleep(2)
+Partners.click()
+
+handles=[]
+handles=driver.window_handles
+
+for handle in handles:
+    print(handles)
+
+New_windows=handles[2]
+driver.switch_to.window(New_windows)
+sleep(5)
+driver.switch_to.default_content()
+sleep(5)
+driver.switch_to.window(handles[0])
+sleep(5)
+
+
+driver.quit()

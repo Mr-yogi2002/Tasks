@@ -1,0 +1,26 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from time import sleep
+from selenium.webdriver import ActionChains
+
+driver=webdriver.Chrome()
+driver.maximize_window()
+driver.get("https://www.saucedemo.com/")
+
+cookie_before=driver.get_cookies()
+print(cookie_before)
+
+
+driver.find_element(by=By.ID, value="user-name").send_keys("standard_user")
+sleep(3)
+driver.find_element(by=By.ID, value="password").send_keys("secret_sauce")
+sleep(3)
+driver.find_element(by=By.ID, value="login-button").click()
+sleep(3)
+
+
+mycookie = driver.get_cookies()
+print(len(mycookie))
+print(mycookie)
+
+driver.quit()

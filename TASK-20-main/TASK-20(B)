@@ -1,0 +1,56 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from time import sleep
+from selenium.webdriver.common.keys import Keys
+
+#Documents and Monthly progress Report webpage download page
+
+driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+driver.get("https://labour.gov.in/")
+
+Documents_link=driver.find_element(By.LINK_TEXT,"Documents")
+
+actions=ActionChains(driver)
+actions.move_to_element(Documents_link).perform()
+sleep(5)
+monthly_progress_report=driver.find_element(By.LINK_TEXT,"Monthly Progress Report")
+monthly_progress_report.click()
+sleep(5)
+
+documents=driver.find_element(By.XPATH,value="//*[@id='fontSize']/div/div/div[3]/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div[2]/div[2]/table/tbody/tr[2]/td[2]/a")
+sleep(5)
+documents.click()
+sleep(5)
+
+alert=driver.switch_to.alert
+alert.accept()
+sleep(20)
+
+handle_windows=driver.switch_to.window(driver.window_handles[1])
+
+driver.quit()
+
+
+#Media and photo gallery webpage open download page
+
+driver=webdriver.Chrome()
+driver.maximize_window()
+driver.get("https://labour.gov.in/")
+
+media_link=driver.find_element(by=By.LINK_TEXT,value="Media")
+sleep(5)
+action=ActionChains(driver)
+action.move_to_element(media_link).perform()
+sleep(5)
+media=driver.find_element(by=By.LINK_TEXT,value="Photo Gallery")
+media.click() 
+sleep(2)
+driver.quit()
+
+
+
+
